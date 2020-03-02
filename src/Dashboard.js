@@ -1,12 +1,11 @@
 import React from 'react';
-import { Paper, Typography } from '@material-ui/core'
+import { Card, CardHeader, Typography } from '@material-ui/core'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import AppBar from '@material-ui/core/AppBar';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { CTX } from './Store';
@@ -56,16 +55,13 @@ export default function Dashboard() {
     const [textValue, changeTextValue] = React.useState();
     // This hook passes a value and function, the value holds state, the function is called to change state
 
+    //https://spectrum.chat/material-ui/help/how-can-i-add-a-colored-title-bar-for-a-paper~1422ff1b-a02e-4a30-be3b-9254216df16f
     return (
         <div>
-            <Paper className={classes.root} elevation={3}>
-                <AppBar>
-                    <Typography variant="h4" component="h4">
-                        Chat app
-                    </Typography>
-                </AppBar>
-                <Typography variant="h5" component="h5">
-                    {activeTopic}
+            <Card className={classes.root} elevation={3}>
+                <CardHeader title="RemoteCloud Chat" style={{backgroundColor:'deepskyblue'}}/>
+                <Typography variant="h6" component="h5">
+                   Chat Room: {activeTopic}
                 </Typography>
                 <div className={classes.flex}>
                     <div className={classes.topicsWindow}>
@@ -99,13 +95,14 @@ export default function Dashboard() {
                     <TextField
                         label="Send a chat"
                         variant="outlined"
+                    
                         className={classes.chatBox}
                         value={textValue}
                         onChange={e => changeTextValue(e.target.value)}
                     />
                     <Button
                         variant="contained"
-                        color="inherit"
+                        color="primary"
                         className={classes.button}
                         onClick={() => {
                             sendChatAction({ from: user, msg: textValue, topic: activeTopic });
@@ -116,7 +113,7 @@ export default function Dashboard() {
                         Send
                     </Button>
                 </div>
-            </Paper>
+            </Card>
         </div>
     )
 }
